@@ -34,5 +34,9 @@ return [
         'key' => '',
         'secret' => '',
     ],
-
+    'github' => [
+        'client_id' => 'cf32c058b13891328f96',
+        'client_secret' => '61996586a8b1d6490e6b72bad9020acdd79eaf41',
+        'redirect' => 'http://localhost:8000/login'
+    ]
 ];

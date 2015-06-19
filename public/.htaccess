@@ -3,13 +3,22 @@
         Options -MultiViews
     </IfModule>
 
+
     RewriteEngine On
 
     # Redirect Trailing Slashes...
-    RewriteRule ^(.*)/$ /$1 [L,R=301]
+    # RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+
+    ### WORKS BUT REDIRECTS ###
+    RewriteCond %{HTTP_HOST} ^api
+    RewriteRule ^(.*)$ http://fourfusa.com/api/v1/$1 [L,P]
+
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    RewriteRule ^ index.php/1$ [L]
+
+
 </IfModule>
