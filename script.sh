@@ -19,6 +19,9 @@ Purple='\033[35;1m'       # Purple
 Cyan='\033[36;1m'         # Cyan
 White='\033[37;1m'        # White
 
+local_db="ffs_db"
+env="local"
+version="0.0.1"
 
 #Add the following lines to your bash_profile
 # demdep(){
@@ -29,8 +32,19 @@ White='\033[37;1m'        # White
 
 cd $myloc
 
-if [ "$1" == "" ]; then
+if [ "$1" == "compress" ]; then
+	
+	gulp watch
 	echo ''
+
+elif [[ "$1" == "compress"  &&  "$2" == "prod" ]]; then	
+
+	gulp --production
+
+elif [ "$1" == "backup" ]; then	
+
+	${mymysqldump}/mysqldump -h localhost -u root -proot ${local_db} --complete-insert --replace --no-create-info  > $myloc/backups/${env}_backup_${version}.sql
+
 
 elif [ "$1" == "help" ]; then	
 	echo "\033[32;1m  *	demdep dump local db            - Dumps local db tables (according to blacklist) into /db/*.sql files\033[0m"

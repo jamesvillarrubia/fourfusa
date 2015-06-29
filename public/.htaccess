@@ -11,14 +11,18 @@
 
 
     ### WORKS BUT REDIRECTS ###
-    RewriteCond %{HTTP_HOST} ^api
-    RewriteRule ^(.*)$ http://fourfusa.com/api/v1/$1 [L,P]
+#    RewriteCond %{HTTP_HOST} ^api
+#    RewriteRule ^(.*)$ http://fourfusa.com/api/v1/$1 [L,P]
 
 
     # Handle Front Controller...
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php/1$ [L]
+    RewriteRule ^ index.php [L]
 
 
+ #   RewriteRule ^(.*)$ index.php/$1 [L]
+
+ 
 </IfModule>

@@ -27,10 +27,11 @@ class CreateTasksTable extends Migration
             $table->boolean('collapsed'); //If set to 1 the task’s sub tasks are collapsed. Otherwise they aren’t.
             $table->integer('indent');  //The indent of the item (a number between 1 and 10, where 1 is top-level).
             $table->integer('priority');  //The priority of the task (a number between 1 and 4, 4 for very urgent and 1 for natural).
-            $table->integer('item_order'); //The order of the task.
-            $table->string('children');//The tasks child tasks (a list of task ids such as [13134,232345]).
+            $table->integer('order'); //The order of the task.
+            $table->integer('parent');//The tasks child tasks (a list of task ids such as [13134,232345]).
             $table->integer('assigned_by_uid'); //The id of user who assigns current task. Makes sense for shared projects only. Accepts 0 or any user id from the list of project collaborators. If this value is unset or invalid, it will automatically be set up by your uid.
             $table->integer('responsible_uid'); //The id of user who is responsible for accomplishing the current task. Makes sense for shared projects only. Accepts 0 or any user id from the list of project collaborators. If this value is unset or invalid, it will automatically be set up by null.
+            $table->string('color_hex'); //hexcode of the color of this group
       });
     }
 

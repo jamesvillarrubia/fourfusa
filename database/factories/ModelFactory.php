@@ -35,10 +35,11 @@ $factory->define(App\Task::class, function ($faker) {
         'collapsed' => $faker->numberBetween(0,1),
         'indent' => $faker->numberBetween(0,10),
         'priority' => $faker->numberBetween(0,10),
- 		'item_order' => $faker->numberBetween(0,30),
- 		'children' =>  serialize([1,2,4,5]),
+ 		'order' => $faker->numberBetween(0,30),
+ 		'parent' =>  $faker->numberBetween(10,20),
  		'assigned_by_uid' => $faker->numberBetween(4,10),
 		'responsible_uid' => $faker->numberBetween(0,3),
+        'color_hex' => '00aef3'
     ];
 });
 

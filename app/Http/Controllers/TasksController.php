@@ -38,10 +38,14 @@ class TasksController extends ApiController
     {
 
         $tasks = Task::all();
+        $tasks = $this->taskTransformer->transformCollection( $tasks->toArray());
+        return view('pages.nested')->with('tasks',$tasks);
+ 
+ /*
         return $this->respond([
             'data'  =>  $this->taskTransformer->transformCollection( $tasks->toArray() )
         ]);
-
+*/
     }
 
 

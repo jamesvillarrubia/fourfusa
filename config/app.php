@@ -143,8 +143,16 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        // Debug Bar
         'Barryvdh\Debugbar\ServiceProvider',
+
+        //Socialite
         Laravel\Socialite\SocialiteServiceProvider::class,
+
+        //Admin Panel
+        'SleepingOwl\Admin\AdminServiceProvider',
+        'Illuminate\Html\HtmlServiceProvider'
 
     ],
 
@@ -195,6 +203,17 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Debugbar'  => 'Barryvdh\Debugbar\Facade',
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'Admin'             => 'SleepingOwl\Admin\Admin',
+        'AdminAuth'         => 'SleepingOwl\AdminAuth\Facades\AdminAuth',
+        'AdminRouter'       => 'SleepingOwl\Admin\Facades\AdminRouter',
+        'AssetManager'      => 'SleepingOwl\Admin\AssetManager\AssetManager',
+        'Column'            => 'SleepingOwl\Admin\Columns\Column',
+        'FormItem'          => 'SleepingOwl\Admin\Models\Form\FormItem',
+        'ModelItem'         => 'SleepingOwl\Admin\Models\ModelItem',
+
+        'Form'      => 'Illuminate\Html\FormFacade',
+        'HTML'      => 'Illuminate\Html\HtmlFacade'
 
     ],
 

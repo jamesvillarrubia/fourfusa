@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar": "^2.0@dev",
-        "laravel/socialite": "^3.0@dev"
+        "laravel/socialite": "^3.0@dev",
+        "sleeping-owl/admin": "dev-master",
+        "illuminate/html": "5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

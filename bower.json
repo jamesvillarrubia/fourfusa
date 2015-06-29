@@ -1,0 +1,27 @@
+{
+  "name": "fourfusa",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jamesvillarrubia/fourfusa",
+  "authors": [
+    "jamesvillarrubia <james.villarrubia@gmail.com>"
+  ],
+  "description": "Task Manager and Gantt viewer",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "resources/assets/vendor"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "bootstrap-select": "~1.6.4",
+    "font-awesome": "~4.3.0",
+    "vue": "~0.12.1",
+    "nestable2": "~1.2.3",
+    "handlebars.js": "~3.0.3",
+    "handlebars": "~3.0.3"
+  }
+}

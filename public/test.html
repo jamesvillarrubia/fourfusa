@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset= "UTF-8" >
+	<title>FourFusa</title>
+	
+	<!-- CSS -->
+	<link media="all" type="text/css" rel="stylesheet" href="http://fourfusa.com/css/fourfusa.css">
+
+
+
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-defualt" role="navigation">
+			<div class="navbar-header">
+				<ul class="nav navbar-nav">
+					<li><a href="./">Home</a></li>
+					<li><a href="./about">About</a></li>
+					<li><a href="./contact">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>	
+	
+
+<ul id="demo">
+  <li v-repeat="items" class="item-{{$index}}">
+    {{$index}} - {{parentMsg}} {{childMsg}}
+  </li>
+</ul>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.1/vue.min.js"></script>
+
+	<script src="http://fourfusa.com/js/app.js"></script>
+
+
+</body>
+</html>
