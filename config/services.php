@@ -35,8 +35,8 @@ return [
         'secret' => '',
     ],
     'github' => [
-        'client_id' => 'cf32c058b13891328f96',
-        'client_secret' => '61996586a8b1d6490e6b72bad9020acdd79eaf41',
-        'redirect' => 'http://localhost:8000/login'
+        'client_id' => '728dd469ec51a705df5c',
+        'client_secret' => 'b6bb3d11af55f79ec985bf28a515da5b5c432abb',
+        'redirect' => 'http://fourfusa.com/login'
     ]
 ];

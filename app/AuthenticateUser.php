@@ -29,13 +29,13 @@ class AuthenticateUser {
 	//Driver is the site
 	//$hasCode is the boolean test
 	//$listener is 
-	public function execute($driver, $hasCode, $listener)
+	public function execute($hasCode, $listener)
 	{
 	
 
 		if ( ! $hasCode )
 		{ 
-			return $this->getAuthorizationFirst('github');
+			return $this->getAuthorizationFirst();
 
 		}
 
@@ -47,10 +47,10 @@ class AuthenticateUser {
 
 	}
 
-	private function getAuthorizationFirst($driver)
+	private function getAuthorizationFirst()
 	{
 
-		return $this->socialite->driver($driver)->redirect();
+		return $this->socialite->driver('github')->redirect();
 
 	}
 

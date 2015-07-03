@@ -10,5 +10,12 @@ abstract class Transformer {
     }
 
     public abstract function transform($item);
+
+    public function reverseCollection($items)
+    {
+        return array_map([$this, 'reverse'], $items);
+    }
+
+    public abstract function reverse($item);
 	
 }

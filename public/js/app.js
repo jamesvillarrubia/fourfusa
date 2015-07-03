@@ -37,6 +37,36 @@ var current_list = [
 $(document).ready(function(){
 
 
+	Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+	    switch (operator) {
+	        case '==':
+	            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+	        case '===':
+	            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+	        case '<':
+	            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+	        case '<=':
+	            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+	        case '>':
+	            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+	        case '>=':
+	            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+	        case '&&':
+	            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+	        case '||':
+	            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+	        default:
+	            return options.inverse(this);
+	    }
+	});
+
+	Handlebars.registerHelper('fromUTC', function (v1){
+		var date = new Date(v1.toString());
+		return moment(date).format('YYYY/MM/DD HH:mm')
+	});
+
+
 	$.fn.createNestableEntry = function(item){
 		var source   = $("#nestable-list-template").html();
 		var template = Handlebars.compile(source);
@@ -140,9 +170,18 @@ $(document).ready(function(){
 			}else{
 				var ol = par.children('ol');
 				var list = ol.children('li');
-				if (list[i-1]){
-					$(list[i-1]).after(li.detach());
-				}else{
+				var set = false;
+				for(var z=0; z<list.length; z++){
+					if($(list[z]).data('local').order){
+						var pointer = $(list[z]).data('local').order;
+						if(pointer > order){
+							set = true;
+							$(list[z]).before(li.detach());
+							break;
+						}
+					}
+				}
+				if(!set){
 					li.detach().appendTo(par.children('ol'));
 				}
 			}
@@ -150,6 +189,39 @@ $(document).ready(function(){
 			
 		};
 	};
+
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
+	$.fn.submitNestable = function() {
+		$('.dd > ol').nestableToArray();
+
+
+        var data = $('.dd > ol').data('tasks');
+
+		var loc = window.location;
+		var currentURL = loc.protocol + '//' + loc.host;
+
+        $.ajax({
+        	method  : 'POST',
+            url   : '/api/v1/tasks',
+            dataType: "json",
+            data  : {tasks: data},
+            success: function(a,b,c){
+            	console.log(a);
+            },
+            complete: function(a,b,c){
+            	console.log(a);
+            },
+            error: function(a,b,c){
+            	console.log(a);
+            }
+        });
+
+    };
 
 
 	$.fn.nestableRunCompletion = function(){
@@ -184,6 +256,39 @@ $(document).ready(function(){
 		$(this).closest('li').children('.dd-editbox').slideToggle(300);
 	});
 
+	$('.dd-toolbar .priority-list li').on('click',function(){
+		var priority = $(this).attr('data-priority');
+		var data = $(this).closest('.dd-item').data('local');
+		var old_pr = parseInt(data.priority);
+		data.priority = parseInt(priority);
+		$(this).closest('.priority-wrapper').children('i.fa-flag').removeClass('priority-'+old_pr);
+		$(this).closest('.priority-wrapper').children('i.fa-flag').addClass('priority-'+priority);
+	});
+
+
+	$('.datepicker').datetimepicker({mask:false, allowBlank:true});
+
+	$('.datepicker').on('change', function(){
+		if($(this).val() != ""){
+			var date = new Date($(this).val());
+			var isStart = ($(this).attr('data-date') == 'start');
+
+			if(isStart){
+				$(this).closest('.dd-item').data('local').start_date_utc = date.toISOString();
+			}else{
+				$(this).closest('.dd-item').data('local').due_date_utc = date.toISOString();
+			}
+		}
+	});
+
+
+	
+
+
+
+
+
+
 	//ANIMATIONS
 	var config = {anim:true}
 
@@ -199,4 +304,5 @@ $(document).ready(function(){
 	}
 
 });
+
 

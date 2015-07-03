@@ -22,6 +22,7 @@ var lessPaths = [
     bowerDir + "font-awesome/less",
     bowerDir + "bootstrap-select/less",
     bowerDir + "nestable2",
+    bowerDir + "datetimepicker"
 ];
  
 elixir(function(mix) {
@@ -38,7 +39,10 @@ elixir(function(mix) {
                 'bootstrap-select/dist/js/bootstrap-select.min.js',
                // 'vue/dist/vue.min.js',
                 'nestable2/jquery.nestable.js',
-                'handlebars/handlebars.min.js'
+                'handlebars/handlebars.min.js',
+                'later/later.js',
+                'datetimepicker/jquery.datetimepicker.js',
+                'moment/moment.js'
             ],
             'public/js/fourfusa.js',
             bowerDir)

@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use Helpers\Transformers\TaskTransformer;
 use App\Task;
+use Auth;
+use Socialite;
 
 
 
@@ -34,18 +36,19 @@ class TasksController extends ApiController
      * @return Response
      */
     public function index()
-
     {
 
-        $tasks = Task::all();
-        $tasks = $this->taskTransformer->transformCollection( $tasks->toArray());
-        return view('pages.nested')->with('tasks',$tasks);
- 
- /*
-        return $this->respond([
-            'data'  =>  $this->taskTransformer->transformCollection( $tasks->toArray() )
-        ]);
-*/
+        if (Auth::check()){
+            $id = Auth::id();
+
+            $tasks = Task::where('user_id',$id)->orderBy('id','asc')->get();
+            $tasks = $this->taskTransformer->transformCollection($tasks->toArray());
+            return view('pages.nested')->with('tasks',$tasks);
+     
+        }
+
+        return redirect()->to('/');
+
     }
 
 
@@ -64,18 +67,34 @@ class TasksController extends ApiController
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
+        if($request->ajax()){
+            $input = $request->all();
+            $tasks = $input['tasks'];
+            $tasks = $this->taskTransformer->untransformCollection($tasks);
 
-       /* if (! Input::get('title'))
-        {
 
-            $this->setStatusCode(422)
-                 ->respondWithError('Validation Failed.');
+            foreach($tasks as $task){
+                $task = Task::firstOrNew(array('id' => 70,'user_id'=>51));
 
-        }*/
-        //dd('store');
+                $task = $this->taskTransformer->untransformCollection($task);
+                
+                $task->save();
+                return $this->respond(['tasks' => $task]);
+            }
+
+            if(is_array($input)){
+        //        return $this->respond(['data' => 'is_array']);
+            }
+        //    return $this->respond(['data' => $input]);
+        }
     }
+
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -88,7 +107,7 @@ class TasksController extends ApiController
         $task = Task::find($id);
         
         if ( ! $task){
-        
+
             return $this->responseNotFound('Task not found!');
         
         }

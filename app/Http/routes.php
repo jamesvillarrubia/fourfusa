@@ -22,22 +22,11 @@ Route::group(['prefix' => 'api/v1'], function(){
 	Route::resource('projects', 'ProjectsController');
 	Route::resource('tasks', 'TasksController');
     Route::resource('labels', 'LabelsController');
-	Route::get('login', 'AuthController@login');
-
+	
 });
 
-
-/*
-Route::group(['domain'=>'api.fourfusa.com'], function(){
-
-    Route::get('/', function() 
-    { 
-    	return redirect()->to('api/v1/tasks');
-        //return 'Hello from my subdomain!'; 
-    });
-
-});
-*/
+Route::get('login', 'AuthController@login');
+Route::get('logout', 'AuthController@logout');
 
 
 
@@ -47,12 +36,9 @@ Route::get('/', function (Request $request) {
 
 	if(Auth::check())
 	{
-		return 'Welcome back, ' . Auth::user()->username;
+		return redirect()->to('api/v1/tasks');
 	} 
-
-	return 'Hi guest. ' ;//. link_to('login', 'Login with Gihub!');
-
-    //return view('welcome');
+	return view('pages.login');
 
 
 });

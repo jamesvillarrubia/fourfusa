@@ -25,7 +25,6 @@ class CreateTasksTable extends Migration
             $table->string('due_date_utc'); // Should be formatted as YYYY-MM-DDTHH:MM, example: 2012-3-24T23:59. Value of due_date_utc must be in UTC. If you want to pass in due dates, note that date_string is required, while due_date_utc can be omitted. If date_string is provided, it will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
             $table->string('start_date_utc'); // Should be formatted as YYYY-MM-DDTHH:MM, example: 2012-3-24T23:59. Value of due_date_utc must be in UTC. If you want to pass in due dates, note that date_string is required, while due_date_utc can be omitted. If date_string is provided, it will be parsed as local timestamp, and converted to UTC internally, according to the user’s profile settings.
             $table->boolean('collapsed'); //If set to 1 the task’s sub tasks are collapsed. Otherwise they aren’t.
-            $table->integer('indent');  //The indent of the item (a number between 1 and 10, where 1 is top-level).
             $table->integer('priority');  //The priority of the task (a number between 1 and 4, 4 for very urgent and 1 for natural).
             $table->integer('order'); //The order of the task.
             $table->integer('parent');//The tasks child tasks (a list of task ids such as [13134,232345]).

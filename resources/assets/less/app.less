@@ -4,6 +4,8 @@
 @import "bootstrap";
 @import "bootstrap-select";
 @import (inline) "jquery.nestable.css";
+@import (inline) "jquery.datetimepicker.css";
+
 
 //variable overrides
 @import "var-over";
@@ -15,7 +17,9 @@ body{
 }
 
 
-
+.dd-item{
+  z-index: inherit;
+}
 .dd-handle{
 	display: block;
 	position: absolute;
@@ -47,6 +51,7 @@ body{
 	  border-bottom: 1px solid #e9e9e9;
 	  padding-left: 20px;
 	  position: relative;
+	  cursor: pointer;
 	  height: 35px;
 	  vertical-align: top;
 	.dd-id {
@@ -70,7 +75,7 @@ body{
 button.dd-collapse, button.dd-expand {
   margin-left: 15px;
   color: rgb(212, 212, 212);
-  z-index: 15;
+  z-index: 1;
   height: 35px;
   margin: 0px 0px 0px 13px;
   line-height: 35px;
@@ -110,17 +115,83 @@ button.dd-expand{
   position: absolute;
   right: 0;
   text-align: right;
-  z-index: 10;
   line-height: 35px;
   color: lightgray;
   cursor: pointer;
   top: 0px;
-  i{
-  	font-size: 13px;
-  	padding-right: 10px;
+  div{
+    i{
+      font-size: 13px;
+      padding-right: 10px; 
+      line-height: 35px;     
+    }
   	cursor: pointer;
-  	&:hover{
-  		color: lightblue;
-  	}
+    display: inline-block;
+  	
   }
+}
+
+.priority-wrapper{
+	.dropdown-menu{
+		z-index: 1000;
+		left: -15px;
+	}
+}
+
+i.priority-4:before{
+	color:rgb(206, 0, 0);
+}
+i.priority-3:before{
+	color:rgb(22, 110, 115);
+}
+i.priority-2:before{
+	color:rgb(113, 202, 208);
+}
+i.priority-1:before{
+	color:lightgray;
+}
+i.priority-0:before{
+	color:lightgray;
+	content: "\f11d";
+}
+
+.priority-list li {
+    padding: 0px 15px;
+    &:hover{
+    	background-color: rgb(240,240,240);
+    	i:hover{
+    		color:black;
+    	}
+    }
+	i{
+		color: black;
+		&:before {
+    		padding-right: 13px;
+		}	
+	}
+}
+
+.clock-wrapper{
+	ul{
+  		width: 210px;
+  		left: -115px;
+		li{ 
+			color:black;
+			div{
+    			width: 60px;
+    			text-align:right;
+			}
+			input{
+    			border: 0px;
+    			padding: 0px 10px;
+    			width: 135px;
+    			background-color: rgb(243, 243, 243);
+  				margin: 5px;
+  				cursor: pointer;
+    			&:focus{
+    				outline: none;
+				}
+			}
+		}
+	}
 }
